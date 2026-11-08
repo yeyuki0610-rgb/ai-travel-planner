@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 旅遊規劃助手</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Microsoft JhengHei", sans-serif;
+            background: #f4f7fb;
+            color: #263449;
+            line-height: 1.8;
+        }
+
+        header {
+            background: linear-gradient(135deg, #315c9b, #6c91c7);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: white;
+            color: #315c9b;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px #0000000d;
+        }
+
+        h2 {
+            color: #315c9b;
+            border-left: 5px solid #6c91c7;
+            padding-left: 12px;
+        }
+
+        .feature {
+            background: #f0f5fc;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #263449;
+            color: #eaf1ff;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        code {
+            color: #315c9b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #68778c;
+        }
+
+        a {
+            color: #315c9b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ AI 旅遊規劃助手</h1>
+    <p>運用人工智慧，快速安排專屬旅遊行程</p>
+    <span class="tag">Python</span>
+    <span class="tag">Ollama</span>
+    <span class="tag">Qwen2.5</span>
+    <span class="tag">Pydantic</span>
+</header>
+
+<main>
+
+    <section>
+        <h2>一、專案介紹</h2>
+        <p>
+            本專案是一個 AI 旅遊規劃助手，使用者只需要輸入旅遊地點、
+            旅遊天數、預算及個人喜好，AI 就會自動產生旅遊計畫。
+        </p>
+        <p>
+            系統會安排每天的旅遊景點、推薦美食、旅遊提醒，
+            並提供預算方面的建議，讓使用者更方便地規劃旅程。
+        </p>
+    </section>
+
+    <section>
+        <h2>二、主要功能</h2>
+
+        <div class="feature">
+            <strong>📍 旅遊地點設定</strong>
+            <p>輸入想前往的城市或國家。</p>
+        </div>
+
+        <div class="feature">
+            <strong>📅 每日行程安排</strong>
+            <p>依照旅遊天數，自動規劃每天的景點。</p>
+        </div>
+
+        <div class="feature">
+            <strong>🍜 美食與旅遊建議</strong>
+            <p>提供推薦美食及旅遊注意事項。</p>
+        </div>
+
+        <div class="feature">
+            <strong>💰 預算建議</strong>
+            <p>根據使用者輸入的預算提供規劃建議。</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>三、使用方法</h2>
+        <p>本程式在 Windows 電腦上執行，需要先安裝 Python 專案工具 uv 及 Ollama。</p>
+
+        <p><strong>1. 安裝 Ollama 模型</strong></p>
+        <pre>ollama pull qwen2.5:3b</pre>
+
+        <p><strong>2. 進入專案資料夾並安裝套件</strong></p>
+        <pre>uv sync</pre>
+
+        <p><strong>3. 執行程式</strong></p>
+        <pre>uv run python main.py</pre>
+
+        <p>
+            執行後輸入旅遊地點、天數、預算及喜好，
+            AI 就會產生旅遊計畫，並儲存成 result.json。
+        </p>
+    </section>
+
+    <section>
+        <h2>四、程式執行結果</h2>
+        <p>以下展示程式實際產生並儲存的 JSON 旅遊規劃結果：</p>
+        <pre id="result">正在載入執行結果...</pre>
+    </section>
+
+    <section>
+        <h2>五、AI 技術與使用說明</h2>
+
+        <p><strong>使用工具：</strong></p>
+        <ul>
+            <li>Python：撰寫程式及處理使用者輸入。</li>
+            <li>Ollama：在本機執行 AI 模型。</li>
+            <li>Qwen2.5:3b：負責理解需求及產生旅遊計畫。</li>
+            <li>Pydantic：定義資料格式並驗證 AI 輸出。</li>
+        </ul>
+
+        <p><strong>使用的 AI 功能：</strong></p>
+        <p>
+            本專案使用 Structured Output（結構化輸出），
+            透過 Pydantic 定義資料欄位，並使用 JSON Schema
+            限制 AI 回傳的資料格式，讓旅遊結果更有條理，
+            也方便程式讀取及儲存。
+        </p>
+
+        <p><strong>AI 使用與修改說明：</strong></p>
+        <p>
+            開發過程中使用 AI 協助理解程式架構、撰寫程式及排除錯誤。
+            開發者自行建立專案環境、安裝套件、執行程式，
+            並確認 AI 能夠產生符合資料格式的旅遊規劃結果。
+        </p>
+
+        <p><strong>專案限制：</strong></p>
+        <p>
+            AI 模型在本機 Ollama 執行，因此 GitHub Pages
+            僅負責展示專案介紹及執行結果，無法直接在網頁上執行本機 AI 模型。
+        </p>
+    </section>
+
+    <section>
+        <h2>六、專案原始碼</h2>
+        <p>
+            想了解完整程式碼，可以前往我的 GitHub 專案：
+        </p>
+        <a href="https://github.com/yeyuki0610-rgb/ai-travel-planner"
+           target="_blank">
+            查看 AI 旅遊規劃助手 GitHub Repository
+        </a>
+    </section>
+
+</main>
+
+<footer>
+    <p>AI 旅遊規劃助手｜Python 專題作品</p>
+</footer>
+
+<script>
+    fetch("../result.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("找不到執行結果檔案");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("result").textContent =
+                JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            document.getElementById("result").textContent =
+                "目前無法載入 result.json，請確認檔案是否已上傳。";
+        });
+</script>
+
+</body>
+</html>
